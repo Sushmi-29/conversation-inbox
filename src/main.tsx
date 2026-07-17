@@ -4,15 +4,11 @@ import './styles/global.css'
 import App from './App.tsx'
 
 async function enableMocking() {
-  if (import.meta.env.DEV === false) {
-    return
-  }
-
-  const { worker } = await import('./mocks/browser')
+  const { worker } = await import("./mocks/browser");
 
   return worker.start({
-    onUnhandledRequest: 'bypass',
-  })
+    onUnhandledRequest: "bypass",
+  });
 }
 
 enableMocking().then(function () {
