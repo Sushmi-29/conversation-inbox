@@ -46,7 +46,7 @@ Open the local URL shown in the terminal (usually `http://localhost:5173`).
 npm run build
 ```
 
-## Project Structure
+## Architecture Overview
 
 ```text
 src/
@@ -65,6 +65,17 @@ src/
 - Visible focus indicators on interactive elements
 - Semantic HTML (`main`, `header`, `nav`, `section`)
 - ARIA attributes such as `aria-label`, `aria-selected`, and `aria-pressed`
+
+## Known Limitations
+
+- Uses mocked API responses through MSW instead of a real backend.
+- Conversation data is not persisted after a page refresh.
+- Authentication and multi-agent collaboration are not implemented.
+- The project focuses on the frontend experience and product workflow.
+
+## Approximate Time Spent
+
+Approximately 8 hours across multiple sessions, including implementation, testing, debugging, documentation, UI polish, and deployment.
 
 ## Future Improvements
 
