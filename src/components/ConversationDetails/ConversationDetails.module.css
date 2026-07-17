@@ -1,0 +1,89 @@
+.details {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 16px;
+}
+
+.section {
+  margin-bottom: 18px;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.text {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+.timelineItem {
+  font-size: 13px;
+  color: #4b5563;
+  padding: 6px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.timelineItem:last-child {
+  border-bottom: none;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.primaryButton,
+.secondaryButton,
+.successButton {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primaryButton {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.primaryButton:hover {
+  background-color: #1d4ed8;
+}
+
+.secondaryButton {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.secondaryButton:hover {
+  background-color: #d1d5db;
+}
+
+.successButton {
+  background-color: #059669;
+  color: #ffffff;
+}
+
+.successButton:hover {
+  background-color: #047857;
+}

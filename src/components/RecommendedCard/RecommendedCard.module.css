@@ -1,0 +1,64 @@
+.recommendedCard {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-left: 4px solid #2563eb;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 16px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.label {
+  min-width: 120px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.value {
+  font-size: 14px;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.priority {
+  font-size: 13px;
+  font-weight: 600;
+  color: #b91c1c;
+  background-color: #fee2e2;
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+
+.openButton {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.openButton:hover {
+  background-color: #1d4ed8;
+}
