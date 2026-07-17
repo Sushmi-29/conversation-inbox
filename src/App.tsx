@@ -275,7 +275,7 @@ function App() {
   }
 
   return (
-    <div className={styles.app}>
+    <main className={styles.app}>
       <Header searchText={searchText} setSearchText={setSearchText} />
       <SummaryCards
         highPriorityCount={highPriorityCount}
@@ -284,7 +284,7 @@ function App() {
       />
 
       {errorMessage !== '' ? (
-        <div className={styles.errorBox}>
+        <section className={styles.errorBox} aria-label="Error message">
           <p className={styles.errorMessage}>{errorMessage}</p>
           <button
             className={styles.retryButton}
@@ -293,7 +293,7 @@ function App() {
           >
             Retry
           </button>
-        </div>
+        </section>
       ) : (
         <>
           <RecommendedCard
@@ -307,6 +307,9 @@ function App() {
             <ConversationList
               isLoading={isLoading}
               conversations={filteredConversations}
+              selectedConversationId={
+                selectedConversation === null ? '' : selectedConversation.id
+              }
               setSelectedConversation={handleSelectConversation}
             />
             <ConversationDetails
@@ -320,7 +323,7 @@ function App() {
           </div>
         </>
       )}
-    </div>
+    </main>
   )
 }
 

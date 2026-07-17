@@ -63,6 +63,11 @@
   background-color: #1d4ed8;
 }
 
+.openButton:focus-visible {
+  outline: 2px solid #1e40af;
+  outline-offset: 2px;
+}
+
 .emptyMessage {
   font-size: 14px;
   color: #6b7280;

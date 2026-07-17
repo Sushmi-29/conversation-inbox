@@ -7,6 +7,11 @@
   cursor: pointer;
 }
 
+.card:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
 .topRow {
   display: flex;
   justify-content: space-between;

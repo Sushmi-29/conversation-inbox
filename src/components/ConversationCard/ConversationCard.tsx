@@ -1,8 +1,10 @@
+import type { KeyboardEvent } from 'react'
 import type { Conversation } from '../../types/Conversation'
 import styles from './ConversationCard.module.css'
 
 type ConversationCardProps = {
   conversation: Conversation
+  isSelected: boolean
   setSelectedConversation: (conversation: Conversation) => void
 }
 
@@ -11,8 +13,25 @@ function ConversationCard(props: ConversationCardProps) {
     props.setSelectedConversation(props.conversation)
   }
 
+  function handleKeyDown(event: KeyboardEvent<HTMLElement>) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      props.setSelectedConversation(props.conversation)
+    }
+  }
+
   return (
-    <article className={styles.card} onClick={handleClick}>
+    <article
+      className={styles.card}
+      role="button"
+      tabIndex={0}
+      aria-selected={props.isSelected}
+      aria-label={
+        'Select conversation with ' + props.conversation.customerName
+      }
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+    >
       <div className={styles.topRow}>
         <h3 className={styles.customerName}>{props.conversation.customerName}</h3>
         <span className={styles.priority}>{props.conversation.priority}</span>

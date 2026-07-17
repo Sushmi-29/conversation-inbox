@@ -5,12 +5,13 @@ import styles from './ConversationList.module.css'
 type ConversationListProps = {
   isLoading: boolean
   conversations: Conversation[]
+  selectedConversationId: string
   setSelectedConversation: (conversation: Conversation) => void
 }
 
 function ConversationList(props: ConversationListProps) {
   return (
-    <section className={styles.conversationList}>
+    <section className={styles.conversationList} aria-label="Conversation list">
       <h2 className={styles.title}>Conversation List</h2>
 
       {props.isLoading ? (
@@ -23,6 +24,7 @@ function ConversationList(props: ConversationListProps) {
             <ConversationCard
               key={conversation.id}
               conversation={conversation}
+              isSelected={props.selectedConversationId === conversation.id}
               setSelectedConversation={props.setSelectedConversation}
             />
           )

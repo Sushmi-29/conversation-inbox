@@ -10,7 +10,7 @@ type RecommendedCardProps = {
 function RecommendedCard(props: RecommendedCardProps) {
   if (props.isLoading) {
     return (
-      <section className={styles.recommendedCard}>
+      <section className={styles.recommendedCard} aria-label="Recommended next conversation">
         <h2 className={styles.title}>⭐ Recommended Next</h2>
         <p className={styles.emptyMessage}>Loading recommendation...</p>
       </section>
@@ -19,7 +19,7 @@ function RecommendedCard(props: RecommendedCardProps) {
 
   if (props.recommendedConversation === null) {
     return (
-      <section className={styles.recommendedCard}>
+      <section className={styles.recommendedCard} aria-label="Recommended next conversation">
         <h2 className={styles.title}>⭐ Recommended Next</h2>
         <p className={styles.emptyMessage}>No conversations found.</p>
       </section>
@@ -33,7 +33,7 @@ function RecommendedCard(props: RecommendedCardProps) {
   }
 
   return (
-    <section className={styles.recommendedCard}>
+    <section className={styles.recommendedCard} aria-label="Recommended next conversation">
       <h2 className={styles.title}>⭐ Recommended Next</h2>
 
       <div className={styles.content}>

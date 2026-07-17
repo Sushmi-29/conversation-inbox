@@ -27,7 +27,7 @@ function ConversationDetails(props: ConversationDetailsProps) {
 
   if (props.isLoading) {
     return (
-      <section className={styles.details}>
+      <section className={styles.details} aria-label="Conversation details">
         <h2 className={styles.title}>Conversation Details</h2>
         <p className={styles.text}>Loading conversation details...</p>
       </section>
@@ -36,7 +36,7 @@ function ConversationDetails(props: ConversationDetailsProps) {
 
   if (props.selectedConversation === null) {
     return (
-      <section className={styles.details}>
+      <section className={styles.details} aria-label="Conversation details">
         <h2 className={styles.title}>Conversation Details</h2>
         {props.statusMessage !== '' && (
           <p className={styles.successMessage}>{props.statusMessage}</p>
@@ -114,7 +114,7 @@ function ConversationDetails(props: ConversationDetailsProps) {
   }
 
   return (
-    <section className={styles.details}>
+    <section className={styles.details} aria-label="Conversation details">
       <h2 className={styles.title}>Conversation Details</h2>
 
       <div className={styles.section}>

@@ -15,7 +15,7 @@ function Filters(props: FiltersProps) {
   }
 
   return (
-    <section className={styles.filters}>
+    <nav className={styles.filters} aria-label="Quick filters">
       <button
         className={
           props.activeFilter === 'High Priority'
@@ -23,6 +23,7 @@ function Filters(props: FiltersProps) {
             : styles.filterButton
         }
         type="button"
+        aria-pressed={props.activeFilter === 'High Priority'}
         onClick={function () {
           handleFilterClick('High Priority')
         }}
@@ -37,6 +38,7 @@ function Filters(props: FiltersProps) {
             : styles.filterButton
         }
         type="button"
+        aria-pressed={props.activeFilter === 'Waiting Long'}
         onClick={function () {
           handleFilterClick('Waiting Long')
         }}
@@ -51,6 +53,7 @@ function Filters(props: FiltersProps) {
             : styles.filterButton
         }
         type="button"
+        aria-pressed={props.activeFilter === 'Negative Sentiment'}
         onClick={function () {
           handleFilterClick('Negative Sentiment')
         }}
@@ -65,13 +68,14 @@ function Filters(props: FiltersProps) {
             : styles.filterButton
         }
         type="button"
+        aria-pressed={props.activeFilter === 'Unassigned'}
         onClick={function () {
           handleFilterClick('Unassigned')
         }}
       >
         Unassigned
       </button>
-    </section>
+    </nav>
   )
 }
 

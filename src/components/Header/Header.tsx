@@ -22,6 +22,7 @@ function Header(props: HeaderProps) {
         className={styles.searchInput}
         type="text"
         placeholder="Search conversations..."
+        aria-label="Search conversations"
         value={props.searchText}
         onChange={handleSearchChange}
       />
