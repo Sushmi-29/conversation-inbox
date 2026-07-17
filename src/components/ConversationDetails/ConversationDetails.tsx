@@ -1,47 +1,43 @@
+import type { Conversation } from '../../types/Conversation'
 import styles from './ConversationDetails.module.css'
 
-function ConversationDetails() {
+type ConversationDetailsProps = {
+  selectedConversation: Conversation
+}
+
+function ConversationDetails(props: ConversationDetailsProps) {
+  const conversation = props.selectedConversation
+
   return (
     <section className={styles.details}>
       <h2 className={styles.title}>Conversation Details</h2>
 
       <div className={styles.section}>
         <h3 className={styles.sectionTitle}>Customer Information</h3>
-        <p className={styles.text}>Name: James Wilson</p>
-        <p className={styles.text}>Email: james.wilson@email.com</p>
-        <p className={styles.text}>Plan: Premium</p>
+        <p className={styles.text}>Name: {conversation.customerName}</p>
+        <p className={styles.text}>Email: {conversation.email}</p>
+        <p className={styles.text}>Plan: {conversation.plan}</p>
       </div>
 
       <div className={styles.section}>
         <h3 className={styles.sectionTitle}>Issue Summary</h3>
-        <p className={styles.text}>
-          Customer reports that payment failed after their subscription renewed.
-          They have been charged but still see an inactive status.
-        </p>
+        <p className={styles.text}>{conversation.issueSummary}</p>
       </div>
 
       <div className={styles.section}>
         <h3 className={styles.sectionTitle}>Conversation Timeline</h3>
-        <p className={styles.timelineItem}>
-          10:12 AM - Customer started chat about payment failure
-        </p>
-        <p className={styles.timelineItem}>
-          10:15 AM - AI asked for order ID and payment method
-        </p>
-        <p className={styles.timelineItem}>
-          10:22 AM - Customer shared screenshots of the charge
-        </p>
-        <p className={styles.timelineItem}>
-          10:28 AM - Escalated to human agent
-        </p>
+        {conversation.timeline.map(function (item, index) {
+          return (
+            <p className={styles.timelineItem} key={index}>
+              {item}
+            </p>
+          )
+        })}
       </div>
 
       <div className={styles.section}>
         <h3 className={styles.sectionTitle}>Escalation Reason</h3>
-        <p className={styles.text}>
-          Billing dispute with failed payment confirmation. AI could not verify
-          the charge status and customer is waiting too long.
-        </p>
+        <p className={styles.text}>{conversation.escalationReason}</p>
       </div>
 
       <div className={styles.actions}>
