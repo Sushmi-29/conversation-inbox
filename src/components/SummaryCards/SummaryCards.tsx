@@ -1,21 +1,27 @@
 import styles from './SummaryCards.module.css'
 
-function SummaryCards() {
+type SummaryCardsProps = {
+  highPriorityCount: number
+  waitingLongCount: number
+  resolvedTodayCount: number
+}
+
+function SummaryCards(props: SummaryCardsProps) {
   return (
     <section className={styles.summaryCards}>
       <div className={styles.card}>
         <p className={styles.label}>High Priority</p>
-        <p className={styles.number}>8</p>
+        <p className={styles.number}>{props.highPriorityCount}</p>
       </div>
 
       <div className={styles.card}>
         <p className={styles.label}>Waiting &gt;30 mins</p>
-        <p className={styles.number}>12</p>
+        <p className={styles.number}>{props.waitingLongCount}</p>
       </div>
 
       <div className={styles.card}>
         <p className={styles.label}>Resolved Today</p>
-        <p className={styles.number}>24</p>
+        <p className={styles.number}>{props.resolvedTodayCount}</p>
       </div>
     </section>
   )

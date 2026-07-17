@@ -88,6 +88,7 @@ function App() {
   >(null)
   const [searchText, setSearchText] = useState('')
   const [activeFilter, setActiveFilter] = useState('')
+  const [statusMessage, setStatusMessage] = useState('')
 
   function loadConversations() {
     setIsLoading(true)
@@ -118,6 +119,10 @@ function App() {
   }, [])
 
   const filteredConversations = conversations.filter(function (conversation) {
+    if (conversation.status === 'Resolved') {
+      return false
+    }
+
     const nameMatchesSearch = conversation.customerName
       .toLowerCase()
       .includes(searchText.toLowerCase())
@@ -145,6 +150,18 @@ function App() {
     return true
   })
 
+  const highPriorityCount = conversations.filter(function (conversation) {
+    return conversation.priority === 'High'
+  }).length
+
+  const waitingLongCount = conversations.filter(function (conversation) {
+    return getWaitingMinutes(conversation.waitingTime) > 30
+  }).length
+
+  const resolvedTodayCount = conversations.filter(function (conversation) {
+    return conversation.status === 'Resolved'
+  }).length
+
   useEffect(
     function () {
       if (isLoading) {
@@ -161,6 +178,14 @@ function App() {
           return filteredConversations[0]
         }
 
+        const stillInList = filteredConversations.some(function (conversation) {
+          return conversation.id === currentConversation.id
+        })
+
+        if (stillInList === false) {
+          return filteredConversations[0]
+        }
+
         return currentConversation
       })
     },
@@ -169,10 +194,94 @@ function App() {
 
   const recommendedConversation = getRecommendedConversation(filteredConversations)
 
+  function handleSelectConversation(conversation: Conversation) {
+    setStatusMessage('')
+    setSelectedConversation(conversation)
+  }
+
+  function handleAssignSuccess(updatedConversation: Conversation) {
+    setStatusMessage('')
+
+    setConversations(function (currentConversations) {
+      return currentConversations.map(function (conversation) {
+        if (conversation.id === updatedConversation.id) {
+          return updatedConversation
+        }
+
+        return conversation
+      })
+    })
+
+    setSelectedConversation(updatedConversation)
+  }
+
+  function handleMarkInProgress(conversation: Conversation) {
+    const updatedConversation: Conversation = {
+      id: conversation.id,
+      customerName: conversation.customerName,
+      issue: conversation.issue,
+      priority: conversation.priority,
+      waitingTime: conversation.waitingTime,
+      sentiment: conversation.sentiment,
+      assigned: conversation.assigned,
+      status: 'In Progress',
+      email: conversation.email,
+      plan: conversation.plan,
+      issueSummary: conversation.issueSummary,
+      timeline: conversation.timeline,
+      escalationReason: conversation.escalationReason,
+    }
+
+    setConversations(function (currentConversations) {
+      return currentConversations.map(function (item) {
+        if (item.id === updatedConversation.id) {
+          return updatedConversation
+        }
+
+        return item
+      })
+    })
+
+    setSelectedConversation(updatedConversation)
+    setStatusMessage('Conversation marked as in progress.')
+  }
+
+  function handleResolve(conversationId: string) {
+    setConversations(function (currentConversations) {
+      return currentConversations.map(function (conversation) {
+        if (conversation.id === conversationId) {
+          return {
+            id: conversation.id,
+            customerName: conversation.customerName,
+            issue: conversation.issue,
+            priority: conversation.priority,
+            waitingTime: conversation.waitingTime,
+            sentiment: conversation.sentiment,
+            assigned: conversation.assigned,
+            status: 'Resolved',
+            email: conversation.email,
+            plan: conversation.plan,
+            issueSummary: conversation.issueSummary,
+            timeline: conversation.timeline,
+            escalationReason: conversation.escalationReason,
+          }
+        }
+
+        return conversation
+      })
+    })
+
+    setStatusMessage('Conversation resolved successfully.')
+  }
+
   return (
     <div className={styles.app}>
       <Header searchText={searchText} setSearchText={setSearchText} />
-      <SummaryCards />
+      <SummaryCards
+        highPriorityCount={highPriorityCount}
+        waitingLongCount={waitingLongCount}
+        resolvedTodayCount={resolvedTodayCount}
+      />
 
       {errorMessage !== '' ? (
         <div className={styles.errorBox}>
@@ -190,7 +299,7 @@ function App() {
           <RecommendedCard
             isLoading={isLoading}
             recommendedConversation={recommendedConversation}
-            setSelectedConversation={setSelectedConversation}
+            setSelectedConversation={handleSelectConversation}
           />
           <Filters activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
 
@@ -198,11 +307,15 @@ function App() {
             <ConversationList
               isLoading={isLoading}
               conversations={filteredConversations}
-              setSelectedConversation={setSelectedConversation}
+              setSelectedConversation={handleSelectConversation}
             />
             <ConversationDetails
               isLoading={isLoading}
               selectedConversation={selectedConversation}
+              statusMessage={statusMessage}
+              onAssignSuccess={handleAssignSuccess}
+              onMarkInProgress={handleMarkInProgress}
+              onResolve={handleResolve}
             />
           </div>
         </>

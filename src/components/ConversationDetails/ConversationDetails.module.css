@@ -66,7 +66,7 @@
   color: #ffffff;
 }
 
-.primaryButton:hover {
+.primaryButton:hover:not(:disabled) {
   background-color: #1d4ed8;
 }
 
@@ -75,7 +75,7 @@
   color: #1f2937;
 }
 
-.secondaryButton:hover {
+.secondaryButton:hover:not(:disabled) {
   background-color: #d1d5db;
 }
 
@@ -84,6 +84,25 @@
   color: #ffffff;
 }
 
-.successButton:hover {
+.successButton:hover:not(:disabled) {
   background-color: #047857;
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled,
+.successButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.successMessage {
+  font-size: 13px;
+  color: #047857;
+  margin-bottom: 10px;
+}
+
+.errorMessage {
+  font-size: 13px;
+  color: #b91c1c;
+  margin-bottom: 10px;
 }

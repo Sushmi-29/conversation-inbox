@@ -9,6 +9,7 @@ export const mockConversations: Conversation[] = [
     waitingTime: '47 mins',
     sentiment: 'Negative',
     assigned: false,
+    status: 'Open',
     email: 'james.wilson@email.com',
     plan: 'Premium',
     issueSummary:
@@ -30,6 +31,7 @@ export const mockConversations: Conversation[] = [
     waitingTime: '38 mins',
     sentiment: 'Negative',
     assigned: false,
+    status: 'Open',
     email: 'emily.chen@email.com',
     plan: 'Business',
     issueSummary:
@@ -51,6 +53,7 @@ export const mockConversations: Conversation[] = [
     waitingTime: '25 mins',
     sentiment: 'Neutral',
     assigned: true,
+    status: 'Open',
     email: 'michael.brown@email.com',
     plan: 'Standard',
     issueSummary:
@@ -72,6 +75,7 @@ export const mockConversations: Conversation[] = [
     waitingTime: '18 mins',
     sentiment: 'Negative',
     assigned: false,
+    status: 'Open',
     email: 'sophia.martinez@email.com',
     plan: 'Premium',
     issueSummary:
@@ -93,6 +97,7 @@ export const mockConversations: Conversation[] = [
     waitingTime: '12 mins',
     sentiment: 'Positive',
     assigned: false,
+    status: 'Open',
     email: 'daniel.lee@email.com',
     plan: 'Standard',
     issueSummary:
@@ -114,6 +119,7 @@ export const mockConversations: Conversation[] = [
     waitingTime: '8 mins',
     sentiment: 'Neutral',
     assigned: true,
+    status: 'Open',
     email: 'ava.thompson@email.com',
     plan: 'Business',
     issueSummary:

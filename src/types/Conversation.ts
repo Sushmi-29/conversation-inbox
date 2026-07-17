@@ -6,6 +6,7 @@ export type Conversation = {
   waitingTime: string
   sentiment: string
   assigned: boolean
+  status: string
   email: string
   plan: string
   issueSummary: string
