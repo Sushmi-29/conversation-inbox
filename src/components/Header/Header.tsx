@@ -1,6 +1,16 @@
+import type { ChangeEvent } from 'react'
 import styles from './Header.module.css'
 
-function Header() {
+type HeaderProps = {
+  searchText: string
+  setSearchText: (value: string) => void
+}
+
+function Header(props: HeaderProps) {
+  function handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
+    props.setSearchText(event.target.value)
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.textBlock}>
@@ -12,6 +22,8 @@ function Header() {
         className={styles.searchInput}
         type="text"
         placeholder="Search conversations..."
+        value={props.searchText}
+        onChange={handleSearchChange}
       />
     </header>
   )

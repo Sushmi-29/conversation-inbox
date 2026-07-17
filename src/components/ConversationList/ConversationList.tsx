@@ -12,15 +12,19 @@ function ConversationList(props: ConversationListProps) {
     <section className={styles.conversationList}>
       <h2 className={styles.title}>Conversation List</h2>
 
-      {props.conversations.map(function (conversation) {
-        return (
-          <ConversationCard
-            key={conversation.id}
-            conversation={conversation}
-            setSelectedConversation={props.setSelectedConversation}
-          />
-        )
-      })}
+      {props.conversations.length === 0 ? (
+        <p className={styles.emptyMessage}>No conversations found.</p>
+      ) : (
+        props.conversations.map(function (conversation) {
+          return (
+            <ConversationCard
+              key={conversation.id}
+              conversation={conversation}
+              setSelectedConversation={props.setSelectedConversation}
+            />
+          )
+        })
+      )}
     </section>
   )
 }

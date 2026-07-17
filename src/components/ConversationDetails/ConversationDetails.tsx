@@ -2,10 +2,19 @@ import type { Conversation } from '../../types/Conversation'
 import styles from './ConversationDetails.module.css'
 
 type ConversationDetailsProps = {
-  selectedConversation: Conversation
+  selectedConversation: Conversation | null
 }
 
 function ConversationDetails(props: ConversationDetailsProps) {
+  if (props.selectedConversation === null) {
+    return (
+      <section className={styles.details}>
+        <h2 className={styles.title}>Conversation Details</h2>
+        <p className={styles.text}>No conversation selected.</p>
+      </section>
+    )
+  }
+
   const conversation = props.selectedConversation
 
   return (

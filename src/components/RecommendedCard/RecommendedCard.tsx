@@ -1,6 +1,27 @@
+import type { Conversation } from '../../types/Conversation'
 import styles from './RecommendedCard.module.css'
 
-function RecommendedCard() {
+type RecommendedCardProps = {
+  recommendedConversation: Conversation | null
+  setSelectedConversation: (conversation: Conversation) => void
+}
+
+function RecommendedCard(props: RecommendedCardProps) {
+  if (props.recommendedConversation === null) {
+    return (
+      <section className={styles.recommendedCard}>
+        <h2 className={styles.title}>⭐ Recommended Next</h2>
+        <p className={styles.emptyMessage}>No conversations found.</p>
+      </section>
+    )
+  }
+
+  const conversation = props.recommendedConversation
+
+  function handleOpenConversation() {
+    props.setSelectedConversation(conversation)
+  }
+
   return (
     <section className={styles.recommendedCard}>
       <h2 className={styles.title}>⭐ Recommended Next</h2>
@@ -8,33 +29,35 @@ function RecommendedCard() {
       <div className={styles.content}>
         <div className={styles.row}>
           <span className={styles.label}>Customer Name</span>
-          <span className={styles.value}>James Wilson</span>
+          <span className={styles.value}>{conversation.customerName}</span>
         </div>
 
         <div className={styles.row}>
           <span className={styles.label}>Issue</span>
-          <span className={styles.value}>Payment failed after subscription renewal</span>
+          <span className={styles.value}>{conversation.issue}</span>
         </div>
 
         <div className={styles.row}>
           <span className={styles.label}>Priority</span>
-          <span className={styles.priority}>High</span>
+          <span className={styles.priority}>{conversation.priority}</span>
         </div>
 
         <div className={styles.row}>
           <span className={styles.label}>Waiting Time</span>
-          <span className={styles.value}>47 mins</span>
+          <span className={styles.value}>{conversation.waitingTime}</span>
         </div>
 
         <div className={styles.row}>
           <span className={styles.label}>Reason</span>
-          <span className={styles.value}>
-            Long wait time and negative customer sentiment
-          </span>
+          <span className={styles.value}>{conversation.escalationReason}</span>
         </div>
       </div>
 
-      <button className={styles.openButton} type="button">
+      <button
+        className={styles.openButton}
+        type="button"
+        onClick={handleOpenConversation}
+      >
         Open Conversation
       </button>
     </section>
