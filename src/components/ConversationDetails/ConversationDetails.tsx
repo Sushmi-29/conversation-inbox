@@ -2,10 +2,20 @@ import type { Conversation } from '../../types/Conversation'
 import styles from './ConversationDetails.module.css'
 
 type ConversationDetailsProps = {
+  isLoading: boolean
   selectedConversation: Conversation | null
 }
 
 function ConversationDetails(props: ConversationDetailsProps) {
+  if (props.isLoading) {
+    return (
+      <section className={styles.details}>
+        <h2 className={styles.title}>Conversation Details</h2>
+        <p className={styles.text}>Loading conversation details...</p>
+      </section>
+    )
+  }
+
   if (props.selectedConversation === null) {
     return (
       <section className={styles.details}>

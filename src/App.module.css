@@ -11,6 +11,35 @@
   margin-top: 20px;
 }
 
+.errorBox {
+  background-color: #ffffff;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+}
+
+.errorMessage {
+  font-size: 15px;
+  color: #991b1b;
+  margin-bottom: 14px;
+}
+
+.retryButton {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.retryButton:hover {
+  background-color: #1d4ed8;
+}
+
 @media (max-width: 900px) {
   .app {
     padding: 16px;

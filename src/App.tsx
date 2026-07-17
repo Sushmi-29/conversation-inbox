@@ -5,7 +5,6 @@ import RecommendedCard from './components/RecommendedCard/RecommendedCard'
 import Filters from './components/Filters/Filters'
 import ConversationList from './components/ConversationList/ConversationList'
 import ConversationDetails from './components/ConversationDetails/ConversationDetails'
-import { mockConversations } from './data/mockConversations'
 import type { Conversation } from './types/Conversation'
 import styles from './App.module.css'
 
@@ -81,13 +80,44 @@ function getRecommendedConversation(conversations: Conversation[]) {
 }
 
 function App() {
+  const [conversations, setConversations] = useState<Conversation[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [errorMessage, setErrorMessage] = useState('')
   const [selectedConversation, setSelectedConversation] = useState<
     Conversation | null
-  >(mockConversations[0])
+  >(null)
   const [searchText, setSearchText] = useState('')
   const [activeFilter, setActiveFilter] = useState('')
 
-  const filteredConversations = mockConversations.filter(function (conversation) {
+  function loadConversations() {
+    setIsLoading(true)
+    setErrorMessage('')
+
+    fetch('/api/conversations')
+      .then(function (response) {
+        if (response.ok === false) {
+          throw new Error('Request failed')
+        }
+
+        return response.json()
+      })
+      .then(function (data: Conversation[]) {
+        setConversations(data)
+        setIsLoading(false)
+      })
+      .catch(function () {
+        setErrorMessage(
+          'Unable to load conversations. Please try again.'
+        )
+        setIsLoading(false)
+      })
+  }
+
+  useEffect(function () {
+    loadConversations()
+  }, [])
+
+  const filteredConversations = conversations.filter(function (conversation) {
     const nameMatchesSearch = conversation.customerName
       .toLowerCase()
       .includes(searchText.toLowerCase())
@@ -117,6 +147,10 @@ function App() {
 
   useEffect(
     function () {
+      if (isLoading) {
+        return
+      }
+
       if (filteredConversations.length === 0) {
         setSelectedConversation(null)
         return
@@ -130,7 +164,7 @@ function App() {
         return currentConversation
       })
     },
-    [searchText, activeFilter]
+    [searchText, activeFilter, conversations, isLoading]
   )
 
   const recommendedConversation = getRecommendedConversation(filteredConversations)
@@ -139,19 +173,40 @@ function App() {
     <div className={styles.app}>
       <Header searchText={searchText} setSearchText={setSearchText} />
       <SummaryCards />
-      <RecommendedCard
-        recommendedConversation={recommendedConversation}
-        setSelectedConversation={setSelectedConversation}
-      />
-      <Filters activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
 
-      <div className={styles.mainContent}>
-        <ConversationList
-          conversations={filteredConversations}
-          setSelectedConversation={setSelectedConversation}
-        />
-        <ConversationDetails selectedConversation={selectedConversation} />
-      </div>
+      {errorMessage !== '' ? (
+        <div className={styles.errorBox}>
+          <p className={styles.errorMessage}>{errorMessage}</p>
+          <button
+            className={styles.retryButton}
+            type="button"
+            onClick={loadConversations}
+          >
+            Retry
+          </button>
+        </div>
+      ) : (
+        <>
+          <RecommendedCard
+            isLoading={isLoading}
+            recommendedConversation={recommendedConversation}
+            setSelectedConversation={setSelectedConversation}
+          />
+          <Filters activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+
+          <div className={styles.mainContent}>
+            <ConversationList
+              isLoading={isLoading}
+              conversations={filteredConversations}
+              setSelectedConversation={setSelectedConversation}
+            />
+            <ConversationDetails
+              isLoading={isLoading}
+              selectedConversation={selectedConversation}
+            />
+          </div>
+        </>
+      )}
     </div>
   )
 }

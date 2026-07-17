@@ -3,6 +3,7 @@ import type { Conversation } from '../../types/Conversation'
 import styles from './ConversationList.module.css'
 
 type ConversationListProps = {
+  isLoading: boolean
   conversations: Conversation[]
   setSelectedConversation: (conversation: Conversation) => void
 }
@@ -12,7 +13,9 @@ function ConversationList(props: ConversationListProps) {
     <section className={styles.conversationList}>
       <h2 className={styles.title}>Conversation List</h2>
 
-      {props.conversations.length === 0 ? (
+      {props.isLoading ? (
+        <p className={styles.emptyMessage}>Loading conversations...</p>
+      ) : props.conversations.length === 0 ? (
         <p className={styles.emptyMessage}>No conversations found.</p>
       ) : (
         props.conversations.map(function (conversation) {

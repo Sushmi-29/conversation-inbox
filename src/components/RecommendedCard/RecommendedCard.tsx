@@ -2,11 +2,21 @@ import type { Conversation } from '../../types/Conversation'
 import styles from './RecommendedCard.module.css'
 
 type RecommendedCardProps = {
+  isLoading: boolean
   recommendedConversation: Conversation | null
   setSelectedConversation: (conversation: Conversation) => void
 }
 
 function RecommendedCard(props: RecommendedCardProps) {
+  if (props.isLoading) {
+    return (
+      <section className={styles.recommendedCard}>
+        <h2 className={styles.title}>⭐ Recommended Next</h2>
+        <p className={styles.emptyMessage}>Loading recommendation...</p>
+      </section>
+    )
+  }
+
   if (props.recommendedConversation === null) {
     return (
       <section className={styles.recommendedCard}>
