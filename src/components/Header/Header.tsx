@@ -14,7 +14,7 @@ function Header(props: HeaderProps) {
   return (
     <header className={styles.header}>
       <div className={styles.textBlock}>
-        <h1 className={styles.greeting}>Good Morning, Sarah</h1>
+        <h1 className={styles.greeting}>Good Morning, Sushmitha</h1>
         <p className={styles.subtitle}>Here's today's support overview</p>
       </div>
 

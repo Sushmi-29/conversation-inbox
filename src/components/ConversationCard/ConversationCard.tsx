@@ -22,7 +22,7 @@ function ConversationCard(props: ConversationCardProps) {
 
   return (
     <article
-      className={styles.card}
+      className={props.isSelected ? styles.cardSelected : styles.card}
       role="button"
       tabIndex={0}
       aria-selected={props.isSelected}

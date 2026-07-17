@@ -9,17 +9,17 @@ type SummaryCardsProps = {
 function SummaryCards(props: SummaryCardsProps) {
   return (
     <section className={styles.summaryCards} aria-label="Support overview">
-      <div className={styles.card}>
+      <div className={styles.highPriorityCard}>
         <p className={styles.label}>High Priority</p>
         <p className={styles.number}>{props.highPriorityCount}</p>
       </div>
 
-      <div className={styles.card}>
+      <div className={styles.waitingLongCard}>
         <p className={styles.label}>Waiting &gt;30 mins</p>
         <p className={styles.number}>{props.waitingLongCount}</p>
       </div>
 
-      <div className={styles.card}>
+      <div className={styles.resolvedTodayCard}>
         <p className={styles.label}>Resolved Today</p>
         <p className={styles.number}>{props.resolvedTodayCount}</p>
       </div>
