@@ -2,6 +2,10 @@
 
 A frontend application that helps support agents manage escalated customer conversations. Conversations are loaded from a mocked API using MSW (Mock Service Worker). The UI is designed so agents can quickly see which conversation to handle next.
 
+## Live Demo
+
+🔗 [View Live Demo](https://conversation-inbox-kohl.vercel.app/)
+
 ## Features
 
 - Dashboard metrics (High Priority, Waiting >30 mins, Resolved Today)
