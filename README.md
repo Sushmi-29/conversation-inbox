@@ -1,75 +1,71 @@
-# React + TypeScript + Vite
+# Conversation Inbox
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A frontend application that helps support agents manage escalated customer conversations. Conversations are loaded from a mocked API using MSW (Mock Service Worker). The UI is designed so agents can quickly see which conversation to handle next.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Dashboard metrics (High Priority, Waiting >30 mins, Resolved Today)
+- Search conversations by customer name
+- Quick filters (High Priority, Waiting Long, Negative Sentiment, Unassigned)
+- Recommended Next conversation
+- Conversation details panel
+- Assign to Me
+- Mark In Progress
+- Resolve conversation
+- Loading state
+- Error state with Retry
+- Empty search / filter state
+- Keyboard accessibility
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- TypeScript
+- Vite
+- CSS Modules
+- MSW (Mock Service Worker)
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+git clone <repository-url>
+cd conversation-inbox
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open the local URL shown in the terminal (usually `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Build
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run build
 ```
+
+## Project Structure
+
+```text
+src/
+  components/   UI pieces such as Header, Filters, ConversationList, and ConversationDetails
+  data/         Mock conversation data used by the MSW handlers
+  mocks/        MSW request handlers and browser worker setup
+  styles/       Global CSS styles
+  types/        Shared TypeScript types
+  App.tsx       Main app state, filtering, recommendation, and data fetching
+  main.tsx      App entry point and MSW startup
+```
+
+## Accessibility
+
+- Keyboard navigation for conversation cards (Tab, Enter, Space)
+- Visible focus indicators on interactive elements
+- Semantic HTML (`main`, `header`, `nav`, `section`)
+- ARIA attributes such as `aria-label`, `aria-selected`, and `aria-pressed`
+
+## Future Improvements
+
+- Backend integration with a real API
+- Real authentication for support agents
+- Pagination for large conversation lists
+- Real-time updates for new escalations
+- Unit and integration tests
